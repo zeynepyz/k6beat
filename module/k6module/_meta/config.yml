@@ -1,0 +1,6 @@
+- module: k6module
+  metricsets: ["k6metricset"]
+  enabled: false
+  period: 10s
+  hosts: ["localhost"]
+

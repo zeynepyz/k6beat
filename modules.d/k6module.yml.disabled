@@ -1,0 +1,9 @@
+# Module: k6module
+# Docs: https://www.elastic.co/guide/en/beats/k6beat/7.17/k6beat-module-k6module.html
+
+- module: k6module
+  metricsets: ["k6metricset"]
+  enabled: false
+  period: 10s
+  hosts: ["localhost"]
+
