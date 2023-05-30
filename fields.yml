@@ -10270,7 +10270,190 @@
           description: >
             k6metricset
           fields:
-            - name: example
-              type: keyword
+            - name: data
+              type: group
               description: >
                 Example field
+              fields:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          description:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          description:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: count
+                          type: integer
+                          description:
+                        - name: rate
+                          type: float
+                          description:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description: 
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description:  
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description:
+                - name: id
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description:
