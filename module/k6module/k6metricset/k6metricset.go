@@ -11,7 +11,6 @@ import (
 // MetricSet has been created then Fetch will begin to be called periodically.
 func init() {
 	mb.Registry.MustAddMetricSet("k6module", "k6metricset", New)
-	print("selam")
 }
 
 // MetricSet holds any configuration or state information. It must implement
@@ -27,7 +26,6 @@ type MetricSet struct {
 // any MetricSet specific configuration options if there are any.
 func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 	cfgwarn.Beta("The k6module k6metricset metricset is beta.")
-	println("MyMetricSet: Starting to collect metrics")
 
 	config := struct{}{}
 	if err := base.Module().UnpackConfig(&config); err != nil {
@@ -45,7 +43,7 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 // of an error set the Error field of mb.Event or simply call report.Error().
 func (m *MetricSet) Fetch(report mb.ReporterV2) error {
 
-	println(report)
+	//println(report)
 
 	return GetReport(report)
 

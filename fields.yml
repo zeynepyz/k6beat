@@ -10288,6 +10288,11 @@
                         - name: value
                           type: float
                           description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:
                 - name: id
                   type: keyword
                   description: 
@@ -10301,6 +10306,11 @@
                         - name: value
                           type: float
                           description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:  
                 - name: id
                   type: keyword
                   description: 
@@ -10317,6 +10327,11 @@
                         - name: rate
                           type: float
                           description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
                 - name: id
                   type: keyword
                   description: 
@@ -10345,6 +10360,11 @@
                         - name: p(95)
                           type: float
                           description: 
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
                 - name: id
                   type: keyword
                   description: 
@@ -10373,6 +10393,11 @@
                         - name: p(95)
                           type: float
                           description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
                 - name: id
                   type: keyword
                   description: 
@@ -10401,6 +10426,11 @@
                         - name: p(95)
                           type: float
                           description:  
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
                 - name: id
                   type: keyword
                   description: 
@@ -10429,6 +10459,11 @@
                         - name: p(95)
                           type: float
                           description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
                 - name: id
                   type: keyword
                   description: 
