@@ -10275,7 +10275,7 @@
               description: >
                 Example field
               fields:
-                - name: id
+                - name: vus
                   type: keyword
                   description: 
                 - name: attributes
@@ -10293,7 +10293,7 @@
               description: >
                 example field
               fields:
-                - name: id
+                - name: vus_max
                   type: keyword
                   description: 
                 - name: attributes
@@ -10311,7 +10311,7 @@
               description: >
                 example field
               fields:  
-                - name: id
+                - name: http_reqs
                   type: keyword
                   description: 
                 - name: attributes
@@ -10332,7 +10332,7 @@
               description: >
                 example field
               fields:              
-                - name: id
+                - name: http_req_duration
                   type: keyword
                   description: 
                 - name: attributes
@@ -10365,7 +10365,7 @@
               description: >
                 example field
               fields:              
-                - name: id
+                - name: http_req_connecting
                   type: keyword
                   description: 
                 - name: attributes
@@ -10398,7 +10398,7 @@
               description: >
                 example field
               fields:              
-                - name: id
+                - name: http_req_receiving
                   type: keyword
                   description: 
                 - name: attributes
@@ -10431,7 +10431,7 @@
               description: >
                 example field
               fields:              
-                - name: id
+                - name: http_req_sending
                   type: keyword
                   description: 
                 - name: attributes
@@ -10464,7 +10464,40 @@
               description: >
                 example field
               fields:              
-                - name: id
+                - name: http_req_tls_handshaking
+                  type: keyword
+                  description: 
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: avg
+                          type: float
+                          description:
+                        - name: max
+                          type: float
+                          description:
+                        - name: med
+                          type: float
+                          description: 
+                        - name: min
+                          type: float
+                          description: 
+                        - name: p(90)
+                          type: float
+                          description:
+                        - name: p(95)
+                          type: float
+                          description:
+            - name: data
+              type: group
+              description: >
+                example field
+              fields:              
+                - name: http_req_waiting
                   type: keyword
                   description: 
                 - name: attributes
