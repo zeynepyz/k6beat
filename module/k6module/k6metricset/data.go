@@ -44,14 +44,14 @@ func Mapping() ([]common.MapStr, error) {
 		res, err := http.Get("http://localhost:6565/v1/metrics/" + url[i])
 
 		if err != nil {
-			print("baglanamadi")
+			print("Error connecting K6:", err)
 			logp.Err("Error connecting K6: ", err)
 			return nil, err
 		}
 
 		if res.StatusCode != http.StatusOK {
 			logp.Err("Returned wrong status code: HTTP %s ", res.Status)
-			print("bir")
+			print("Returned wrong status code:", err)
 			return nil, fmt.Errorf("HTTP %s", res.Status)
 		}
 
@@ -59,7 +59,7 @@ func Mapping() ([]common.MapStr, error) {
 		res.Body.Close()
 		if err != nil {
 			logp.Err("Error reading stats: %v", err)
-			print("iki")
+			print("Error reading stats:", err)
 			return nil, fmt.Errorf("HTTP%s", res.Status)
 		}
 
@@ -68,7 +68,7 @@ func Mapping() ([]common.MapStr, error) {
 
 		if err != nil {
 			logp.Err("Error unmarshal: ", err)
-			print("error unmarsall")
+			print("Error unmarsall:", err)
 			return nil, err
 		}
 
@@ -83,34 +83,19 @@ func Mapping() ([]common.MapStr, error) {
 
 		if data.Data.Attributes.Sample.Rate != 0 {
 			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["rate"] = data.Data.Attributes.Sample.Rate
-		}
-
-		if data.Data.Attributes.Sample.Value != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["value"] = data.Data.Attributes.Sample.Value
-		}
-
-		if data.Data.Attributes.Sample.Avg != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["avg"] = data.Data.Attributes.Sample.Avg
-		}
-
-		if data.Data.Attributes.Sample.Max != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["max"] = data.Data.Attributes.Sample.Max
-		}
-
-		if data.Data.Attributes.Sample.Med != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["med"] = data.Data.Attributes.Sample.Med
-		}
-
-		if data.Data.Attributes.Sample.P90 != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["p(90)"] = data.Data.Attributes.Sample.P90
-		}
-
-		if data.Data.Attributes.Sample.P95 != 0 {
-			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["p(95)"] = data.Data.Attributes.Sample.P95
-		}
-
-		if data.Data.Attributes.Sample.Count != 0 {
 			event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["count"] = data.Data.Attributes.Sample.Count
+		} else {
+			if data.Data.Attributes.Sample.Value != 0 {
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["value"] = data.Data.Attributes.Sample.Value
+			} else {
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["avg"] = data.Data.Attributes.Sample.Avg
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["max"] = data.Data.Attributes.Sample.Max
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["med"] = data.Data.Attributes.Sample.Med
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["p(90)"] = data.Data.Attributes.Sample.P90
+				event["data"].(common.MapStr)["attributes"].(common.MapStr)["sample"].(common.MapStr)["p(95)"] = data.Data.Attributes.Sample.P95
+
+			}
+
 		}
 
 		events = append(events, event)
@@ -127,7 +112,7 @@ func GetReport(report mb.ReporterV2) error {
 
 	events, err := Mapping()
 	if err != nil {
-		print("get reportta sorun var")
+		print("FAILURE", err)
 		return errors.Wrap(err, "failure")
 	}
 
