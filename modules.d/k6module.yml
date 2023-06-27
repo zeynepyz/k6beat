@@ -5,5 +5,5 @@
   metricsets: ["k6metricset"]
   enabled: true
   period: 15s
-  hosts: ["localhost"]
+  hosts: ["localhost:6565"]
 

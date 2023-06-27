@@ -2,6 +2,7 @@ package k6metricset
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -23,8 +24,10 @@ type Sample struct {
 }
 
 type Metric struct {
-	ID         string        `json:"id"`
-	Attributes common.MapStr `json:"attributes"`
+	ID         string `json:"id"`
+	Attributes struct {
+		Sample Sample `json:"sample"`
+	} `json:"attributes"`
 }
 
 type Data struct {
@@ -37,7 +40,7 @@ func Mapping() (common.MapStr, error) {
 		return nil, err
 	}
 
-	defer res.Body.Close()
+	//defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
 		return nil, errors.New("Returned wrong status code: HTTP " + res.Status)
@@ -60,48 +63,47 @@ func Mapping() (common.MapStr, error) {
 		},
 	}
 
+	wantedMetricIDs := []string{"vus", "vus_max", "http_reqs", "http_req_duration", "http_req_connecting", "http_req_receiving",
+		"http_req_sending", "http_req_tls_handshaking", "http_req_waiting"}
+
 	for _, metric := range data.Metrics {
-		sample := metric.Attributes["sample"].(Sample)
-		metricFields := common.MapStr{}
 
-		if sample.Rate != 0 {
-			metricFields["rate"] = sample.Rate
+		if contains(wantedMetricIDs, metric.ID) {
+			sample := metric.Attributes.Sample
+			metricFields := common.MapStr{}
+			if sample.Rate != 0 {
+				metricFields["rate"] = sample.Rate
+				metricFields["count"] = sample.Count
+			} else {
+				if sample.Value != 0 {
+					metricFields["value"] = sample.Value
+				} else {
+					metricFields["avg"] = sample.Avg
+					metricFields["max"] = sample.Max
+					metricFields["med"] = sample.Med
+					metricFields["p(90)"] = sample.P90
+					metricFields["P(95)"] = sample.P95
+
+				}
+
+			}
+			event["data"].(common.MapStr)["metrics"].(common.MapStr)[metric.ID] = metricFields
 		}
 
-		if sample.Value != 0 {
-			metricFields["value"] = sample.Value
-		}
-
-		if sample.Avg != 0 {
-			metricFields["avg"] = sample.Avg
-		}
-
-		if sample.Max != 0 {
-			metricFields["max"] = sample.Max
-		}
-
-		if sample.Med != 0 {
-			metricFields["med"] = sample.Med
-		}
-
-		if sample.Min != 0 {
-			metricFields["min"] = sample.Min
-		}
-
-		if sample.P90 != 0 {
-			metricFields["p(90)"] = sample.P90
-		}
-
-		if sample.P95 != 0 {
-			metricFields["p(95)"] = sample.P95
-		}
-
-		event["data"].(common.MapStr)["metrics"].(common.MapStr)[metric.ID] = metricFields
 	}
 
-	print(event)
+	fmt.Printf("%+v\n", event)
 
 	return event, nil
+}
+
+func contains(items []string, item string) bool {
+	for _, i := range items {
+		if i == item {
+			return true
+		}
+	}
+	return false
 }
 
 func GetReport(report mb.ReporterV2) error {
@@ -111,7 +113,5 @@ func GetReport(report mb.ReporterV2) error {
 	}
 
 	report.Event(mb.Event{MetricSetFields: event})
-	print(report)
-
 	return nil
 }

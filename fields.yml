@@ -10275,253 +10275,675 @@
               description: >
                 Example field
               fields:
-                - name: vus
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
                         - name: value
                           type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:
-                - name: vus_max
-                  type: keyword
-                  description: 
-                - name: attributes
-                  type: group
-                  fields:
-                    - name: sample
-                      type: group
-                      description:
-                      fields:
-                        - name: value
+                        - name: avg
                           type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:  
-                - name: http_reqs
-                  type: keyword
-                  description: 
-                - name: attributes
-                  type: group
-                  fields:
-                    - name: sample
-                      type: group
-                      description:
-                      fields:
-                        - name: count
-                          type: integer
+                        - name: max
+                          type: float
+                          optional: true
                           description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
                         - name: rate
                           type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_duration
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
+                          optional: true
                           description: 
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_connecting
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_receiving
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
-                          description:  
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_sending
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_tls_handshaking
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
                           description:
-            - name: data
-              type: group
-              description: >
-                example field
-              fields:              
-                - name: http_req_waiting
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
                   type: keyword
-                  description: 
+                  description:
                 - name: attributes
                   type: group
                   fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
                     - name: sample
                       type: group
                       description:
                       fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
                         - name: avg
                           type: float
+                          optional: true
                           description:
                         - name: max
                           type: float
+                          optional: true
                           description:
                         - name: med
                           type: float
+                          optional: true
                           description: 
                         - name: min
                           type: float
+                          optional: true
                           description: 
                         - name: p(90)
                           type: float
+                          optional: true
                           description:
                         - name: p(95)
                           type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
+                  type: keyword
+                  description:
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
+                        - name: avg
+                          type: float
+                          optional: true
+                          description:
+                        - name: max
+                          type: float
+                          optional: true
+                          description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
+                  type: keyword
+                  description:
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
+                        - name: avg
+                          type: float
+                          optional: true
+                          description:
+                        - name: max
+                          type: float
+                          optional: true
+                          description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
+                  type: keyword
+                  description:
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
+                        - name: avg
+                          type: float
+                          optional: true
+                          description:
+                        - name: max
+                          type: float
+                          optional: true
+                          description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
+                  type: keyword
+                  description:
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
+                        - name: avg
+                          type: float
+                          optional: true
+                          description:
+                        - name: max
+                          type: float
+                          optional: true
+                          description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
+                          description:
+                - name: type
+                  type: text
+                  description:
+                - name: id
+                  type: keyword
+                  description:
+                - name: attributes
+                  type: group
+                  fields:
+                    - name: type
+                      type: text
+                      description:
+                    - name: contains
+                      type: text
+                    - name: tainted
+                      type: null
+                    - name: sample
+                      type: group
+                      description:
+                      fields:
+                        - name: value
+                          type: float
+                          optional: true
+                          description:
+                        - name: avg
+                          type: float
+                          optional: true
+                          description:
+                        - name: max
+                          type: float
+                          optional: true
+                          description:
+                        - name: med
+                          type: float
+                          optional: true
+                          description: 
+                        - name: min
+                          type: float
+                          optional: true
+                          description: 
+                        - name: p(90)
+                          type: float
+                          optional: true
+                          description:
+                        - name: p(95)
+                          type: float
+                          optional: true
+                          description: 
+                        - name: rate
+                          type: float
+                          optional: true
+                          description:
+                        - name: count
+                          type: integer
+                          optional: true
                           description:
