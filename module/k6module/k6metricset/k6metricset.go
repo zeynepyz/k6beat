@@ -1,8 +1,25 @@
 package k6metricset
 
 import (
+	"fmt"
+
 	"github.com/elastic/beats/v7/libbeat/common/cfgwarn"
+	"github.com/elastic/beats/v7/metricbeat/helper"
 	"github.com/elastic/beats/v7/metricbeat/mb"
+	"github.com/elastic/beats/v7/metricbeat/mb/parse"
+	"github.com/elastic/elastic-agent-libs/logp"
+)
+
+const (
+	defaultScheme = "http"
+	defaultPath   = "/v1/metrics"
+)
+
+var (
+	hostParser = parse.URLHostParserBuilder{
+		DefaultScheme: defaultScheme,
+		DefaultPath:   defaultPath,
+	}.Build()
 )
 
 // init registers the MetricSet with the central registry as soon as the program
@@ -10,7 +27,10 @@ import (
 // the MetricSet for each host defined in the module's configuration. After the
 // MetricSet has been created then Fetch will begin to be called periodically.
 func init() {
-	mb.Registry.MustAddMetricSet("k6module", "k6metricset", New)
+	mb.Registry.MustAddMetricSet("k6module", "k6metricset", New,
+		mb.WithHostParser(hostParser),
+		mb.DefaultMetricSet(),
+	)
 }
 
 // MetricSet holds any configuration or state information. It must implement
@@ -20,6 +40,8 @@ func init() {
 type MetricSet struct {
 	mb.BaseMetricSet
 	counter int
+	http    *helper.HTTP
+	Log     *logp.Logger
 }
 
 // New creates a new instance of the MetricSet. New is responsible for unpacking
@@ -32,19 +54,32 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 		return nil, err
 	}
 
+	http, err := helper.NewHTTP(base)
+	if err != nil {
+		return nil, err
+	}
+
 	return &MetricSet{
 		BaseMetricSet: base,
-		counter:       1,
+		http:          http,
 	}, nil
 }
 
 // Fetch methods implements the data gathering and data conversion to the right
 // format. It publishes the event which is then forwarded to the output. In case
 // of an error set the Error field of mb.Event or simply call report.Error().
-func (m *MetricSet) Fetch(report mb.ReporterV2) error {
+func (m *MetricSet) Fetch(reporter mb.ReporterV2) error {
 
-	//println(report)
+	content, err := m.http.FetchContent()
+	if err != nil {
+		return fmt.Errorf("error in http fetch: %w", err)
+	}
 
-	return GetReport(report)
+	event, _ := Mapping(content)
+	reporter.Event(mb.Event{MetricSetFields: event})
+
+	return nil
+
+	//return GetReport(report)
 
 }

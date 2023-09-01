@@ -3,12 +3,8 @@ package k6metricset
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 
 	"github.com/elastic/beats/v7/libbeat/common"
-	"github.com/elastic/beats/v7/metricbeat/mb"
-	"github.com/pkg/errors"
 )
 
 type Sample struct {
@@ -34,25 +30,12 @@ type Data struct {
 	Metrics []Metric `json:"data"`
 }
 
-func Mapping() (common.MapStr, error) {
-	res, err := http.Get("http://localhost:6565/v1/metrics")
-	if err != nil {
-		return nil, err
-	}
-
-	//defer res.Body.Close()
-
-	if res.StatusCode != http.StatusOK {
-		return nil, errors.New("Returned wrong status code: HTTP " + res.Status)
-	}
-
-	bodyBytes, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+func Mapping(response []byte) (common.MapStr, error) {
 
 	var data Data
-	err = json.Unmarshal(bodyBytes, &data)
+	var err error
+
+	err = json.Unmarshal(response, &data)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +65,7 @@ func Mapping() (common.MapStr, error) {
 					metricFields["max"] = sample.Max
 					metricFields["med"] = sample.Med
 					metricFields["p(90)"] = sample.P90
-					metricFields["P(95)"] = sample.P95
+					metricFields["p(95)"] = sample.P95
 
 				}
 
@@ -104,14 +87,4 @@ func contains(items []string, item string) bool {
 		}
 	}
 	return false
-}
-
-func GetReport(report mb.ReporterV2) error {
-	event, err := Mapping()
-	if err != nil {
-		return errors.Wrap(err, "failure")
-	}
-
-	report.Event(mb.Event{MetricSetFields: event})
-	return nil
 }
