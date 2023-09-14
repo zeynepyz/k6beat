@@ -7,7 +7,6 @@ import (
 	"github.com/elastic/beats/v7/metricbeat/helper"
 	"github.com/elastic/beats/v7/metricbeat/mb"
 	"github.com/elastic/beats/v7/metricbeat/mb/parse"
-	"github.com/elastic/elastic-agent-libs/logp"
 )
 
 const (
@@ -39,9 +38,7 @@ func init() {
 // interface methods except for Fetch.
 type MetricSet struct {
 	mb.BaseMetricSet
-	counter int
-	http    *helper.HTTP
-	Log     *logp.Logger
+	http *helper.HTTP
 }
 
 // New creates a new instance of the MetricSet. New is responsible for unpacking
@@ -75,11 +72,13 @@ func (m *MetricSet) Fetch(reporter mb.ReporterV2) error {
 		return fmt.Errorf("error in http fetch: %w", err)
 	}
 
-	event, _ := Mapping(content)
+	event, err := eventMapping(content)
+	if err != nil {
+		return fmt.Errorf("error in returning event: %w", err)
+	}
+
 	reporter.Event(mb.Event{MetricSetFields: event})
 
 	return nil
-
-	//return GetReport(report)
 
 }

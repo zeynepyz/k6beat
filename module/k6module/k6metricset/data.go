@@ -30,14 +30,14 @@ type Data struct {
 	Metrics []Metric `json:"data"`
 }
 
-func Mapping(response []byte) (common.MapStr, error) {
+func eventMapping(response []byte) (common.MapStr, error) {
 
 	var data Data
 	var err error
 
 	err = json.Unmarshal(response, &data)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("JSON unmarshall fail: %v", err)
 	}
 
 	event := common.MapStr{
@@ -48,6 +48,15 @@ func Mapping(response []byte) (common.MapStr, error) {
 
 	wantedMetricIDs := []string{"vus", "vus_max", "http_reqs", "http_req_duration", "http_req_connecting", "http_req_receiving",
 		"http_req_sending", "http_req_tls_handshaking", "http_req_waiting"}
+
+	contains := func(items []string, item string) bool {
+		for _, i := range items {
+			if i == item {
+				return true
+			}
+		}
+		return false
+	}
 
 	for _, metric := range data.Metrics {
 
@@ -75,16 +84,5 @@ func Mapping(response []byte) (common.MapStr, error) {
 
 	}
 
-	fmt.Printf("%+v\n", event)
-
 	return event, nil
-}
-
-func contains(items []string, item string) bool {
-	for _, i := range items {
-		if i == item {
-			return true
-		}
-	}
-	return false
 }
