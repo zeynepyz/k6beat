@@ -5,7 +5,10 @@ This file is generated! See scripts/mage/docs_collector.go
 [options="header"]
 |===
 |Modules   |Dashboards   |Metricsets   
+|<<k6beat-module-k6module,k6module>>  beta[]   |image:./images/icon-no.png[No prebuilt dashboards]    |  
+.1+| .1+|  |<<k6beat-metricset-k6module-k6metricset,k6metricset>> beta[]  
 |===
 
 --
 
+include::modules/k6module.asciidoc[]
