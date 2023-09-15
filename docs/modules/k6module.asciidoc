@@ -1,0 +1,41 @@
+////
+This file is generated! See scripts/mage/docs_collector.go
+////
+
+:modulename: k6module
+
+[[k6beat-module-k6module]]
+== k6module module
+
+beta[]
+
+This is the k6module module.
+
+
+
+[float]
+=== Example configuration
+
+The k6module module supports the standard configuration options that are described
+in <<configuration-k6beat>>. Here is an example configuration:
+
+[source,yaml]
+----
+k6beat.modules:
+- module: k6module
+  metricsets: ["k6metricset"]
+  enabled: false
+  period: 10s
+  hosts: ["localhost"]
+
+----
+
+[float]
+=== Metricsets
+
+The following metricsets are available:
+
+* <<k6beat-metricset-k6module-k6metricset,k6metricset>>
+
+include::k6module/k6metricset.asciidoc[]
+
