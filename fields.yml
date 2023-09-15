@@ -10278,7 +10278,7 @@
                 - name: type
                   type: text
                   description:
-                - name: id
+                - name: http_req_connecting
                   type: keyword
                   description:
                 - name: attributes
@@ -10296,7 +10296,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10352,7 +10352,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10408,7 +10408,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10464,7 +10464,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10520,7 +10520,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10576,7 +10576,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10632,7 +10632,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10688,7 +10688,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10744,7 +10744,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10800,7 +10800,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10856,7 +10856,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg
@@ -10912,7 +10912,7 @@
                       description:
                       fields:
                         - name: value
-                          type: float
+                          type: integer
                           optional: true
                           description:
                         - name: avg

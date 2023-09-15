@@ -8,12 +8,45 @@ import (
 	"testing"
 
 	"github.com/elastic/beats/v7/libbeat/common"
+
 	mbtest "github.com/elastic/beats/v7/metricbeat/mb/testing"
 	"github.com/stretchr/testify/assert"
 )
 
+func TestFetchEventContents(t *testing.T) {
+	absPath, err := filepath.Abs("../_meta/testdata/")
+	assert.NoError(t, err)
+
+	response, err := ioutil.ReadFile(absPath + "/k6metrics.json")
+	assert.NoError(t, err)
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(200)
+		w.Header().Set("Content-Type", "application/json;")
+		w.Write([]byte(response))
+	}))
+	defer server.Close()
+
+	config := map[string]interface{}{
+		"module":     "k6module",
+		"metricsets": []string{"k6metricset"},
+		"hosts":      []string{server.URL},
+	}
+
+	f := mbtest.NewReportingMetricSetV2Error(t, config)
+	events, errs := mbtest.ReportingFetchV2Error(f)
+	if len(errs) > 0 {
+		t.Fatalf("Expected 0 error, had %d. %v\n", len(errs), errs)
+	}
+	assert.NotEmpty(t, events)
+	event := events[0].MetricSetFields
+
+	t.Logf("%s/%s event: %+v", f.Module().Name(), f.Name(), event.StringToPrint())
+
+}
+
 func TestEventMapping(t *testing.T) {
-	content, err := ioutil.ReadFile("./_meta/test/data_for_test.json")
+	content, err := ioutil.ReadFile("./_meta/testdata/k6metrics.json")
 	assert.NoError(t, err)
 
 	event, _ := eventMapping(content)
@@ -98,34 +131,4 @@ func TestEventMapping_InvalidJSON(t *testing.T) {
 		t.Errorf("Beklenen hata metni alınmadı. Beklenen: 'json: cannot unmarshal object into Go struct field Data.data of type []k6metricset.Metric', Alınan: %v", err)
 	}
 
-}
-
-func TestFetchEventContent(t *testing.T) {
-	absPath, err := filepath.Abs("../_meta/testdata/")
-	assert.NoError(t, err)
-
-	response, err := ioutil.ReadFile(absPath + "/k6metrics")
-	assert.NoError(t, err)
-
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(200)
-		w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
-		w.Write([]byte(response))
-	}))
-	defer server.Close()
-
-	config := map[string]interface{}{
-		"module":      "k6module",
-		"metricsets":  []string{"k6metricset"},
-		"k6metricset": []string{server.URL},
-	}
-
-	f := mbtest.NewReportingMetricSetV2Error(t, config)
-	events, errs := mbtest.ReportingFetchV2Error(f)
-	if len(errs) > 0 {
-		t.Fatalf("Expected 0 error, had %d. %v\n", len(errs), errs)
-	}
-	assert.NotEmpty(t, events)
-
-	t.Logf("%s/%s event: %+v", f.Module().Name(), f.Name(), events[0])
 }

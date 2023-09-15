@@ -38,7 +38,8 @@ func init() {
 // interface methods except for Fetch.
 type MetricSet struct {
 	mb.BaseMetricSet
-	http *helper.HTTP
+	hostdata mb.HostData
+	http     *helper.HTTP
 }
 
 // New creates a new instance of the MetricSet. New is responsible for unpacking
@@ -59,6 +60,7 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 	return &MetricSet{
 		BaseMetricSet: base,
 		http:          http,
+		hostdata:      base.HostData(),
 	}, nil
 }
 
