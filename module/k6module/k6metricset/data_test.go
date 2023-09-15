@@ -4,7 +4,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"path/filepath"
 	"testing"
 
 	"github.com/elastic/beats/v7/libbeat/common"
@@ -14,10 +13,7 @@ import (
 )
 
 func TestFetchEventContents(t *testing.T) {
-	absPath, err := filepath.Abs("../_meta/testdata/")
-	assert.NoError(t, err)
-
-	response, err := ioutil.ReadFile(absPath + "/k6metrics.json")
+	response, err := ioutil.ReadFile("./_meta/testdata/k6metrics.json")
 	assert.NoError(t, err)
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
