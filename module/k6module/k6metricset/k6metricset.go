@@ -62,6 +62,7 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 		http:          http,
 		hostdata:      base.HostData(),
 	}, nil
+
 }
 
 // Fetch methods implements the data gathering and data conversion to the right

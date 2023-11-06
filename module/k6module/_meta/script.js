@@ -6,7 +6,7 @@ import http from 'k6/http';
    			contacts: {
       				executor: 'constant-vus',
       				vus: 10,
-      				duration: '30s',
+      				duration: '5m',
     },
   },
 };
